@@ -18,7 +18,8 @@
     "passport": "^0.4.0",
     "serve-favicon": "^2.4.5",
     "url": "^0.11.0",
-    "winston": "^3.0.0-rc1"
+    "winston": "^3.0.0-rc1",
+    "babel-core": "^5.8.23"
   },
   "scripts": {
     "start": "node --v node start.js"

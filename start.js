@@ -1,3 +1,5 @@
+/*use strict*/
+
 let express = require('express'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
