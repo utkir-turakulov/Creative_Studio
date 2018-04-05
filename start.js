@@ -21,7 +21,7 @@ const userSchema = Joi.object().keys({
     confirmationPassword: Joi.any().valid(Joi.ref('password')).required()
 });
 
-const port = 3000;
+const port = 8080;//3000;
 let app = express();
 
 app.set('views', path.join(__dirname, 'views'));
