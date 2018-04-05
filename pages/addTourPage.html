@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"/>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"/>
+</head>
+<script>
+
+    function saveTour() {
+        let name = document.querySelector('#name'),
+            country = document.querySelector('#country'),
+            city = document.querySelector('#city'),
+            price = document.querySelector('#price'),
+            attach = document.querySelector('#attach');
+
+        let xhr = new XMLHttpRequest();
+        let formData = new FormData();
+
+        let type = attach.files[0].type.split('/')[1];
+        formData.append('file', attach.files[0]);
+        formData.append('name',name.value);
+
+        xhr.open("POST", '/add-tours', true);
+        xhr.setRequestHeader("Content-Type", 'multipart/form-data');
+
+        xhr.send(formData);
+
+    }
+
+
+
+
+</script>
+<div >
+    <p style="color: #2e6da4">Добавить тур</p>
+    <form method="post" enctype="multipart/form-data" action="/add-tours" >
+        <label>Введите имя</label><input type="text" name = "name" id="name"><br>
+        <label>Введите страну</label><input type="text" name ="country" id="country"><br>
+        <label>Введите город</label><input type="text" name="city" id="city"><br>
+        <label>Введите цену</label><input type="text" name="price" id="price"><br>
+        <label>Прикрепить файлы:</label>
+        <input name="attachment" name="attach" type="file" id="attach">
+        <br>
+        <button type="submit"  >Добавить</button>
+    </form>
+</div>
+
+<div>
+    <p style="color: #2e6da4">Добавить отель</p>
+    <form method="post" enctype="multipart/form-data" action="/add-hotels">
+        <label>Введите имя</label><input type="text" name = "name" id="hotel_name"><br>
+        <label>Введите страну</label><input type="text" name ="country" id="hotel_country"><br>
+        <label>Введите город</label><input type="text" name="city" id="hotel_city"><br>
+        <label>Введите цену</label><input type="text" name="price" id="hotel_price"><br>
+        <label>Прикрепить файлы:</label>
+        <input name="attachment" name="attach" type="file" id="hotel_attach">
+        <br>
+        <button type="submit"  >Добавить</button>
+    </form>
+</div>
+
+</body>
+</html>

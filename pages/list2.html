@@ -1,0 +1,199 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Creative Studio</title>
+
+		<script  src="http://code.jquery.com/jquery-latest.js"></script>
+		<script type="text/javascript" src="../sources/bootstrap/bootstrap.js"></script>
+		<link rel="stylesheet" href="../sources/bootstrap/bootstrap.css">
+		<link rel="stylesheet" href="../sources/bootstrap/bootstrap-theme.css.map" >
+		<link href="../css/style.css" type="text/css" rel="stylesheet"/>
+		<link href="../css/style2.css" type="text/css" rel="stylesheet"/>
+		
+	</head>
+	<body>
+		<div id="tops-line"></div>
+		<div>
+					<script>
+$(document).ready(function(){
+$('.login-trigger').click(function(){
+	$(this).next('.login-content').slideToggle();
+	$(this).toggleClass('active');					
+	
+	if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;');
+		else $(this).find('span').html('&#x25BC;')
+	})
+});
+</script>
+
+<script>
+	/*function getImage() {
+        var request = new XMLHttpRequest();
+        request.responseType = 'arraybuffer';
+        request.open('GET', '/tour-list');
+        request.onload = function() {
+            console.log(request.response);
+            console.log(request.response.body);
+            console.log(request.response.byteLength);
+        };
+        request.send();
+    }*/
+       //var getImageResult  ;
+       // var b64encoded = btoa(String.fromCharCode.apply(null, getImageResult.imagebuffer));
+        //var datajpg = "data:image/jpg;base64," + b64encoded;
+        //document.getElementById("myimage").src = datajpg;
+    $(document).ready(function() {
+        $("#send").click(function () {
+           /* $.post("/tour-list", function (data, status) {
+                let buf = data.img.data;
+                let image = document.querySelector('#myimage');
+                $("#myimage").attr("size",'auto');
+                $("#myimage").attr("src", "data:image/png;base64," + buf);
+                //image.src = 'data:image/png;base64,' + buf.toString('base64');
+                //alert("Data: " + data.name + "\nStatus: " + status);
+            });*/
+
+            $.post( "/tour-list", {"name":"Солнечная Греция" }, function( data ) {
+                let buf = data.img.data;
+                let image = document.querySelector('#myimage');
+                $("#myimage").attr("size",'auto');
+                $("#myimage").attr("src", "data:image/png;base64," + buf);
+            }, "json");
+
+        });
+    });
+</script>
+
+			<nav>
+				<ul>
+					<li id="login">
+						<a class="login-trigger" href="#">Войти <span>&#x25BC;</span></a>
+						<div class="login-content">
+							<form>
+								<fieldset class="inputs">
+									<input class="username" type="email" name="Email" placeholder="Ваш email адрес" required>
+									<input class="password" type="password" name="Password" placeholder="Пароль" required>
+								</fieldset>
+								<fieldset class="actions">
+									<input type="submit" class="submit" value="Войти">
+									<label><input type="checkbox" checked="checked"> Запомнить меня</label>
+								</fieldset>
+							</form>
+						</div>
+					</li>
+					<li>
+						<a class="login-trigger"  href="#">Регистрация<span>&#x25BC;</span></a>
+						<div class="login-content">
+							<form>
+								<fieldset class="inputs">
+									<input class="username" type="email" name="Email" placeholder="Ваш email адрес" required>
+									<input class="password" type="password" name="Password" placeholder="Пароль" required>
+									<input class="password" type="password" name="Password" placeholder="Повторить пароль" required>
+								</fieldset>
+								<fieldset class="actions">
+									<input type="submit" class="submit" value="Регистрация">
+								</fieldset>
+							</form>
+						</div>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<div id="wrapper">
+			<div id="header"> 
+					<div id="logo">
+						<a href="creative.html"><img src="../images/logo.png" alt="Логотип" /></a>
+					</div>
+					<div id="menu">
+						<ul>
+							<li style="list-style-type:none"><a href="../pages/creative.html" class="active">Главная</a></li>
+							<li style="list-style-type:none"><a href="../pages/list2.html">Туры</a></li>
+							<li style="list-style-type:none"><a href="../pages/отели.html">Отели</a></li>
+							
+							<li style="list-style-type:none"><a href="../pages/Бронь.html">Бронь</a></li>
+							
+						</ul>
+					</div>
+			</div>
+			<div id="header-image">
+					<div id="black-box">
+						<p>У нас лучшие туры <a href="#">Заказать &raquo;</a></p>
+					</div>
+			</div>
+
+			<div>
+				<h2>Информация о турах</h2>
+
+				<div class="row">
+					<div class="col-xs-4">
+						<select  class="form-control">
+							<option>test1</option>
+							<option>test2</option>
+							<option>test3</option>
+						</select>
+					</div>
+					<div class="col-xs-4">
+						<select  class="form-control">
+							<option>test1</option>
+							<option>test2</option>
+							<option>test3</option>
+						</select>
+					</div>
+
+					<button tabindex="-1" class="btn btn-default" type="button" title="ok" value="get" id="send">Найти</button>
+				</div>
+
+
+			<div class="row">
+				<div class="col-sm-6 col-md-4" >
+					<div class="thumbnail">
+						<img id="myimage">
+						<div class="caption">
+							<h3>Вьетнам</h3>
+							<p>51 817 руб.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			</div>
+			<div id="content">
+			</div>
+			<div id="portfolio">
+				<h2>Поиск</h2>
+				
+			</div>
+			<div id="bottom-row">
+				<div id="blog">
+					<h3><strong>Blog updates</strong></h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque quis nulla id orci malesuada porta posuere quis massa. Nunc vitae purus non augue scelerisque ultricies vitae et velit. Sed vitae lectus id sem lobortis scelerisque. Praesent eget consequat libero.</p>
+					</div>
+					<div id="social">
+						<h3>Connect with us</h3>
+						<ul>
+							<li style="list-style-type:none"> <a> <image src="../images/twitter_icon.png " alt="Twitter"/> </a> </li>
+							<li style="list-style-type:none"> <a> <image src="../images/facebook_icon.png " alt="Facebook"/> </a> </li>
+							<li style="list-style-type:none"> <a href="#"> <image src="../images/flickr_icon.png " alt="Flickr"/> </a> </li>
+							<li style="list-style-type:none"> <a href="#"> <image src="../images/rss_icon.png " alt="RSS"/> </a> </li>
+						</ul>
+					</div>
+			</div>
+			<div id="footer">
+				<div id="footer-content"> 
+						<ul id="otstup">
+							<li style="list-style-type:none" ><a href="#">Главная</a> </li>
+							<li style="list-style-type:none"><a href="#">Туры</a> </li>
+							<li style="list-style-type:none"><a href="#">Отели</a> </li>
+							<li style="list-style-type:none"><a href="#">О нас</a> </li>
+							
+						</ul>
+						<div class="clear"> </div>
+						<p>&copy; 2010 CreativeStudio. All Rights Reserved</p>
+						<div id="logo-footer"> </div>
+					</div>
+			</div>
+		</div>
+		
+	</body>
+</html>

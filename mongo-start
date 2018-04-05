@@ -1,0 +1,1 @@
+mongod --dbpath E:\MongoDB\MongoData --logpath E:\MongoDB\MongoLogs\mongolog.log
