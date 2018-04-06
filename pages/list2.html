@@ -27,41 +27,39 @@ $('.login-trigger').click(function(){
 </script>
 
 <script>
-	/*function getImage() {
-        var request = new XMLHttpRequest();
-        request.responseType = 'arraybuffer';
-        request.open('GET', '/tour-list');
-        request.onload = function() {
-            console.log(request.response);
-            console.log(request.response.body);
-            console.log(request.response.byteLength);
-        };
-        request.send();
-    }*/
-       //var getImageResult  ;
-       // var b64encoded = btoa(String.fromCharCode.apply(null, getImageResult.imagebuffer));
-        //var datajpg = "data:image/jpg;base64," + b64encoded;
-        //document.getElementById("myimage").src = datajpg;
     $(document).ready(function() {
         $("#send").click(function () {
-           /* $.post("/tour-list", function (data, status) {
-                let buf = data.img.data;
-                let image = document.querySelector('#myimage');
-                $("#myimage").attr("size",'auto');
-                $("#myimage").attr("src", "data:image/png;base64," + buf);
-                //image.src = 'data:image/png;base64,' + buf.toString('base64');
-                //alert("Data: " + data.name + "\nStatus: " + status);
-            });*/
 
-            $.post( "/tour-list", {"name":"Солнечная Греция" }, function( data ) {
-                let buf = data.img.data;
-                let image = document.querySelector('#myimage');
-                $("#myimage").attr("size",'auto');
-                $("#myimage").attr("src", "data:image/png;base64," + buf);
+            $.post( "/tour-list", {"name":"Турция" }, function( data ) {
+                for(var i = 0;i< data.length; i++)
+				{
+                    let buf = data.items[i].img.data;
+                    let tumb = document.createElement('div').setAttribute('class' ,'thumbnail'),
+                        img = document.createElement('img').setAttribute('class' ,'myimage'+i),
+                        caption = document.createElement('div').setAttribute('class' ,'caption'),
+                        wrapper = document.createElement('div').setAttribute('class' ,'col-sm-6 col-md-4');
+
+
+
+					/	*To do Закончить вывод элементов* /
+					/*img.setAttribute("size",'auto');
+                    img.setAttribute("src", "data:image/png;base64," + buf);*/
+                    tumb.appendChild(img);
+                    tumb.appendChild(caption);
+                    wrapper.appendChild(tumb);
+                    $(".tour-list.row").append(wrapper);
+                    $(".myimage"+i).attr("size",'auto');
+                    $(".myimage"+i).attr("src", "data:image/png;base64," + buf);
+                    $(".myimage"+i).apend();
+                   /* $(".myimage").attr("size",'auto');
+                    $(".myimage").attr("src", "data:image/png;base64," + buf);*/
+				}
+
             }, "json");
 
         });
     });
+
 </script>
 
 			<nav>
@@ -143,7 +141,7 @@ $('.login-trigger').click(function(){
 					<button tabindex="-1" class="btn btn-default" type="button" title="ok" value="get" id="send">Найти</button>
 				</div>
 
-
+		<div class="tour-list">
 			<div class="row">
 				<div class="col-sm-6 col-md-4" >
 					<div class="thumbnail">
@@ -155,7 +153,7 @@ $('.login-trigger').click(function(){
 					</div>
 				</div>
 			</div>
-
+		</div>
 
 			</div>
 			<div id="content">
