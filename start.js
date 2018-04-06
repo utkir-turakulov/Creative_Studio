@@ -21,7 +21,7 @@ const userSchema = Joi.object().keys({
     confirmationPassword: Joi.any().valid(Joi.ref('password')).required()
 });
 
-const port = 3000;
+const port = 8080;
 let app = express();
 
 app.set('views', path.join(__dirname, 'views'));
@@ -232,10 +232,10 @@ app.listen(port, function (err) {
         throw err;
     else {
         mongoose.Promise = global.Promise;
-        mongoose.connect('mongodb://localhost:27017/site-auth').then(() => {
+     /*   mongoose.connect('mongodb://localhost:27017/site-auth').then(() => {
             console.log("Connected to MongoDB !");
         }).then(() => {
             console.log("App listen on port: " + port);
-        });
+        });*/
     }
 });
