@@ -9,10 +9,10 @@ let express = require('express'),
     mongoose = require('mongoose'),
     passport = require('passport'),
     Joi = require('joi'),
-    user_hash = require(__dirname + '/models/user.js');
-const User = require(path.join(__dirname, '/models/user.js')),
-    Tour = require(path.join(__dirname, '/models/tour.js')),
-    Hotel = require(path.join(__dirname, '/models/hotel.js'));
+    user_hash = require(path.join(__dirname , '../models/user.js'));
+const User = require(path.join(__dirname, '../models/user.js')),
+    Tour = require(path.join(__dirname, '../models/tour.js')),
+    Hotel = require(path.join(__dirname, '../models/hotel.js'));
 const fileUpload = require('express-fileupload');
 const userSchema = Joi.object().keys({
     email: Joi.string().email().required(),
@@ -85,9 +85,9 @@ app.get('/pages/:page', async function (request, response) {
 
         if (user !== null) {
             console.log('Сессия пользователя: ' + user);
-            response.sendFile(path.join(__dirname, "pages/Бронь.html"));
+            response.sendFile(path.join(__dirname, "..pages/Бронь.html"));
         } else {
-            response.sendFile(path.join(__dirname, "pages/регистр.html"));
+            response.sendFile(path.join(__dirname, "..pages/регистр.html"));
         }
 
     }
@@ -97,22 +97,22 @@ app.get('/css/:path', function (request, response) {
     response.sendFile(path.join(__dirname + "/css/" + request.params.path));
 });
 app.get('/sources/bootstrap/:file', function (req, res) {
-    res.sendFile(path.join(__dirname, '/sources/bootstrap/', req.params.file));
+    res.sendFile(path.join(__dirname, '../sources/bootstrap/', req.params.file));
 });
 app.get('/sources/images/:file', function (req, res) {
-    res.sendFile(path.join(__dirname, '/sources/images/', req.params.file));
+    res.sendFile(path.join(__dirname, '../sources/images/', req.params.file));
 });
 app.get('/images/:file', function (req, res) {
-    res.sendFile(path.join(__dirname, '/images/', req.params.file));
+    res.sendFile(path.join(__dirname, '../images/', req.params.file));
 });
 
 app.get('/sources/js/:file', function (req, res) {
     console.log(req.params.file);
-    res.sendFile(path.join(__dirname, '/sources/js/', req.params.file));
+    res.sendFile(path.join(__dirname, '../sources/js/', req.params.file));
 });
 
 app.get('/registration', async (req, res, next) => {
-    res.sendFile(__dirname + '/pages/register.html');
+    res.sendFile(__dirname + '../pages/register.html');
 });
 app.post('/registration', async (req, res, next) => {
     try {
@@ -121,7 +121,7 @@ app.post('/registration', async (req, res, next) => {
         if (result.error) {
             req.flash('error', 'Data entered is not valid. Please try again.');
             console.log("Data entered is not valid. Please try again.");
-            res.sendFile(__dirname + '/pages/register.html');
+            res.sendFile(__dirname + '../pages/register.html');
             return
         }
 
@@ -129,7 +129,7 @@ app.post('/registration', async (req, res, next) => {
         if (user) {
             req.flash('error', 'Email is already in use.');
             console.log("Email is already in use.");
-            res.sendFile(__dirname + '/pages/регистр.html');
+            res.sendFile(__dirname + '../pages/регистр.html');
             return
         }
 
@@ -143,7 +143,7 @@ app.post('/registration', async (req, res, next) => {
 
         req.flash('success', 'Registration successfully, go ahead and login.');
         console.log('Registration successfully, go ahead and login.');
-        res.sendFile(__dirname + '/pages/Бронь.html');
+        res.sendFile(__dirname + '../pages/Бронь.html');
 
     } catch (error) {
         res.send("Could not find");
@@ -168,7 +168,7 @@ app.post('/sign-in', async function (req, res, next) {
     if (hashPassword) {
         req.session.user = {id: user._id, name: user.username, email: user.email};
         res.setHeader("Set-Cookie", "User=" + user.email, {maxAge: 10800});
-        res.sendFile(__dirname + '/pages/Бронь.html');
+        res.sendFile(__dirname + '../pages/Бронь.html');
         console.log('success ' + res.getHeader('Set-Cookie'));
     }
     else {
@@ -191,7 +191,7 @@ app.post('/add-tours', bodyParser.urlencoded({extended: false}), async function 
     tour.city = req.body.city;
     tour.price = req.body.price;
     tour.save();
-    res.sendFile(__dirname + '/pages/addTourPage.html');
+    res.sendFile(__dirname + '../pages/addTourPage.html');
 });
 
 app.post('/add-hotels', bodyParser.urlencoded({extended: false}), async function (req, res, next) {
@@ -204,7 +204,7 @@ app.post('/add-hotels', bodyParser.urlencoded({extended: false}), async function
     hotel.city = req.body.city;
     hotel.price = req.body.price;
     hotel.save();
-    res.sendFile(__dirname + '/pages/addTourPage.html');
+    res.sendFile(__dirname + '../pages/addTourPage.html');
 });
 
 app.post('/tour-list', async function (req, res, next) {
@@ -226,16 +226,12 @@ app.post('/tour-list', async function (req, res, next) {
 
 });
 
-app.listen(port, function (err) {
-
-    if (err)
-        throw err;
-    else {
+app.listen(port, function () {
         mongoose.Promise = global.Promise;
         mongoose.connect('mongodb://localhost:27017/site-auth').then(() => {
             console.log("Connected to MongoDB !");
         }).then(() => {
             console.log("App listen on port: " + port);
         });
-    }
+
 });
