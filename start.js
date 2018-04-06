@@ -1,3 +1,5 @@
+
+
 let express = require('express'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
@@ -10,6 +12,7 @@ let express = require('express'),
     passport = require('passport'),
     Joi = require('joi'),
     user_hash = require(__dirname + '/models/user.js');
+
 const User = require(path.join(__dirname, '/models/user.js')),
     Tour = require(path.join(__dirname, '/models/tour.js')),
     Hotel = require(path.join(__dirname, '/models/hotel.js'));
