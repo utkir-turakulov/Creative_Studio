@@ -115,7 +115,7 @@ app.get('/sources/js/:file', function (req, res) {
 });
 
 app.get('/registration', async (req, res, next) => {
-    res.sendFile(__dirname + '/pages/register.html');
+    res.sendFile(__dirname + '/pages/регистр.html');
 });
 app.post('/registration', async (req, res, next) => {
     try {
@@ -124,7 +124,7 @@ app.post('/registration', async (req, res, next) => {
         if (result.error) {
             req.flash('error', 'Data entered is not valid. Please try again.');
             console.log("Data entered is not valid. Please try again.");
-            res.sendFile(__dirname + '/pages/register.html');
+            res.sendFile(__dirname + '/pages/регистр.html');
             return
         }
 
