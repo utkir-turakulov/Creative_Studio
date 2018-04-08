@@ -13,6 +13,14 @@ a{
 	font-weight:bold;
 	text-transform: uppercase;
 }
+
+.tour-list{
+	padding-top: 25px;
+}
+
+.hotel-list{
+	padding-top: 25px;
+}
 p{
 	margin:8px 0;
 }
